@@ -1,0 +1,18 @@
+{
+  "name": "empAddressBook",
+  "version": "1.0.0",
+  "description": "Employee Address Book in AngularJS and Node.js",
+  "main": "server.js",
+  "scripts": {
+    "test": "zebra"
+  },
+  "keywords": [
+    "angularjs",
+    "ng"
+  ],
+  "author": "Anupama",
+  "license": "Open",
+  "dependencies": {
+    "express": "^4.12.3"
+  }
+}

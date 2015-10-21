@@ -1,0 +1,36 @@
+.name{
+    
+}
+.email{
+
+}
+.position{
+    
+}
+li div{
+    width: 30%;
+    float: left;
+
+}
+li{
+    height: 60px;
+}
+.halfCell{
+    width: 49% !important;
+    float: left;
+}
+.fullCell{
+    width: 98% !important;
+    float: left;
+}
+span.has-error{
+    line-height: 10px;
+    font-size: 10px;
+    height: 10px;
+    width: 49%;
+    float: left;
+    color: #a94442;
+}
+li.yell{
+    background-color: #90EE90;
+}

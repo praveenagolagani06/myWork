@@ -1,0 +1,76 @@
+<!doctype html>
+<html ng-app="addressBook">    
+    <head>
+        <meta charset="utf-8">
+        <title>Address Book</title>
+        <link href = "css/bootstrap.css" rel = "stylesheet" \>
+        <link href = "css/styles.css" rel = "stylesheet" \>
+        <script src = "vendor/angular.min.js"></script>
+        <script src = "js/controller.js"></script>
+    </head>
+    <body>
+        
+        <div ng-controller = "AddressCtrl" class = "container">
+            <legend>Employee Address Book</legend>
+            <div class="input-group stylish-input-group">
+                <input type="text" ng-model="searchStr" class="form-control"  placeholder="Search" > 
+            </div>
+            <hr \>
+           
+            <ul class="list-unstyled">
+                <li class="list-group-item active">
+                    <div class="name">Name</div>
+                    <div class="email">E-Mail</div>
+                    <div class="position">Position</div>
+                    <button sytle="width:10%;" ng-click="addClick()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add</button>
+                </li>
+                <li class="list-group-item yell" ng-show="addClicked" style="height:80px;">
+                    <form name="addForm">
+                        <div class="name">
+                            <input type="text" class="form-control halfCell" name="firstName" ng-model="newEmp.firstName" placeholder="First Name" required ng-maxlength="150">
+                            <input type="text" class="form-control halfCell" name="lastName" ng-model="newEmp.lastName" placeholder="Last Name" required ng-maxlength="150">
+                            <span class="has-error" ng-visible="addForm.firstName.$invalid || addForm.firstName.$error.maxlength">First Name: Required <br> max-length:150 Chars</span>
+                            <span class="has-error" ng-visible="addForm.lastName.$invalid || addForm.lastName.$error.maxlength">Last Name: Required <br> max-length:150 Chars</span>
+                        </div>
+                        <div class="email">
+                            <input type="email" class="form-control fullCell" name="email" ng-model="newEmp.email" placeholder="E-mail" required ng-maxlength="150">
+                            <span class="has-error" ng-visible="addForm.email.$invalid || addForm.email.$error.maxlength">E-mail: Required <br> Invalid</span>
+                        </div>
+                        <div class="position">
+                            <input type="text" class="form-control fullCell" name="position" ng-model="newEmp.position" placeholder="Position" ng-maxlength="75">
+                            <span class="has-error" ng-visible="addForm.position.$error.maxlength">Position: max-length: 75 Chars</span>
+                        </div>
+                    </form>
+                    <button ng-disabled="!addForm.$valid" class="btn btn-default" ng-click="add()"><span class="glyphicon glyphicon-plus-sign"></span> Add</button>
+                </li>
+                <li class="list-group-item yell" ng-show="editClicked" style="height:80px;" id="editLI">
+                    <form name="editForm">
+                        <div class="name">
+                            <input type="text" class="form-control halfCell" name="firstName" ng-model="oldEmp.firstName" placeholder="First Name" required ng-maxlength="150">
+                            <input type="text" class="form-control halfCell" name="lastName" ng-model="oldEmp.lastName" placeholder="Last Name" required ng-maxlength="150">
+                            <span class="has-error" ng-visible="editForm.firstName.$invalid || editForm.firstName.$error.maxlength">First Name: Required <br> max-length:150 Chars</span>
+                            <span class="has-error" ng-visible="editForm.lastName.$invalid || editForm.lastName.$error.maxlength">Last Name: Required <br> max-length:150 Chars</span>
+                        </div>
+                        <div class="email">
+                            <input type="email" class="form-control fullCell" name="email" ng-model="oldEmp.email" placeholder="E-mail" required ng-maxlength="150">
+                            <span class="has-error" ng-visible="editForm.email.$invalid || editForm.email.$error.maxlength">E-mail: Required <br> Invalid</span>
+                        </div>
+                        <div class="position">
+                            <input type="text" class="form-control fullCell" name="position" ng-model="oldEmp.position" placeholder="Position" ng-maxlength="75">
+                            <span class="has-error" ng-visible="editForm.position.$error.maxlength">Position: max-length: 75 Chars</span>
+                        </div>
+                    </form>
+                    <button ng-disabled="!editForm.$valid" class="btn btn-default" ng-click="edit()"><span class="glyphicon glyphicon-ok"></span> Edit</button>
+                </li>
+                <li class="list-group-item" ng-repeat="emp in employees | filter:{active:true} | filter:searchStr | orderBy:'-id'">
+                    <div class="name">{{emp.firstName}} {{emp.lastName}}&nbsp;</div>
+                    <div class="email">{{emp.email}}&nbsp;</div>
+                    <div class="position">{{emp.position}}&nbsp;</div>
+                    <a href="#" ng-click="editClick(emp.id)"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a href="#" ng-click="delete(emp.id)"><span class="glyphicon glyphicon-trash"></span></a>
+                </li> 
+            </ul>
+        </div>
+        
+    </body>
+</html>
